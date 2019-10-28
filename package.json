@@ -1,0 +1,10 @@
+{
+  "name": "Project",
+  "description": "Test task for diJust",
+  "author": "Re-z",
+  "devDependencies": {
+    "gulp": "~4.0",
+    "gulp-sass": "^4.0.2",
+    "node-sass": "^4.13.0"
+  }
+}
