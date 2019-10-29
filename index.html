@@ -73,23 +73,24 @@
                                     >Password</span>
                                 
                                 <div class="form-input__ico-wrap">
-                                    <div class="form-input__ico">
-                                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.5"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.8082 6.06667C6.36882 6.06667 1.04883 14.2333 1.04883 14.2333C1.04883 14.2333 6.36882 22.4 13.8082 22.4C21.2475 22.4 26.5675 14.2333 26.5675 14.2333C26.5675 14.2333 21.2475 6.06667 13.8082 6.06667Z" stroke="#7D77E9" stroke-linecap="round" stroke-linejoin="round"/><path fill-rule="evenodd" clip-rule="evenodd" d="M13.8081 18.6667C16.1969 18.6667 18.1333 16.5773 18.1333 14C18.1333 11.4227 16.1969 9.33334 13.8081 9.33334C11.4194 9.33334 9.48291 11.4227 9.48291 14C9.48291 16.5773 11.4194 18.6667 13.8081 18.6667Z" stroke="#7D77E9" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.2943 13.0667C11.9839 13.6468 11.9853 14.362 12.2982 14.9406C12.611 15.5193 13.1873 15.8727 13.8081 15.8667" stroke="#7D77E9" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
-                                    </div>
                                     <input 
                                         type="password" 
                                         v-model="forms.loginFormPassword"
                                         class="form-input__input" 
                                         :class="{'has-error' : formWithErrors === true}"
                                         placeholder="Enter your password">
+                                    <div class="form-input__ico">
+                                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><g class="form-input__svg" opacity="0.5"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.8082 6.06667C6.36882 6.06667 1.04883 14.2333 1.04883 14.2333C1.04883 14.2333 6.36882 22.4 13.8082 22.4C21.2475 22.4 26.5675 14.2333 26.5675 14.2333C26.5675 14.2333 21.2475 6.06667 13.8082 6.06667Z" stroke="#7D77E9" stroke-linecap="round" stroke-linejoin="round"/><path fill-rule="evenodd" clip-rule="evenodd" d="M13.8081 18.6667C16.1969 18.6667 18.1333 16.5773 18.1333 14C18.1333 11.4227 16.1969 9.33334 13.8081 9.33334C11.4194 9.33334 9.48291 11.4227 9.48291 14C9.48291 16.5773 11.4194 18.6667 13.8081 18.6667Z" stroke="#7D77E9" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.2943 13.0667C11.9839 13.6468 11.9853 14.362 12.2982 14.9406C12.611 15.5193 13.1873 15.8727 13.8081 15.8667" stroke="#7D77E9" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+                                    </div>
                                 </div>
                                 
-                                <small class="form-input__err" v-if="formWithErrors">Incorrect nickname or email</small>
+                                <small class="form-input__err" v-if="formWithErrors">Incorrect password</small>
                             </div>
                         </div>
                         
                         <div class="log-in__btn-wrap">
                             <button 
+                                @click.prevent="formWithErrors = true"
                                 type="submit" 
                                 :disabled="!loginFormIsValid()"
                                 :class="{'is-disabled' : loginFormIsValid() === false}"
@@ -103,9 +104,133 @@
                         
                     </form>
                 </div>
-                <div class="sign-up" v-if="activeTab === 'sign-up'">
-                    <span>Sign up</span>
-                </div>
+
+                <form class="sign-up" v-if="activeTab === 'sign-up'">
+                    <div class="stepper">
+                        <div class="stepper__item">
+                            <span class="stepper__item-name">Account</span>
+                            <br>
+                            <div class="stepper__item-round"></div>
+                        </div>
+                        <div class="stepper__item text-align-center">
+                            <span class="stepper__item-name">Profile</span>
+                            <br>
+                            <span class="stepper__item-round"></span>
+                        </div>
+                        <div class="stepper__item text-align-right">
+                            <span class="stepper__item-name">Verification</span>
+                            <br>
+                            <span class="stepper__item-round"></span>
+                        </div>
+                    </div>
+
+                    <div class="sign-up__box">
+                        <div class="sign-up__left">
+                            <div class="form-input">
+                                <span class="form-input__label">Pick an account</span>
+                                <div class="acc-types">
+                                    <input type="radio" class="acc-types__radio" checked name="acc-type" id="business">
+                                    <label for="business" class="acc-types__item">
+                                        <p class="acc-types__text">Business account</p>
+                                        <div class="acc-types__img">
+                                            <svg width="54" height="36" viewBox="0 0 54 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path class="acc-types__svg-path" d="M37.1953 17.7031C41.375 17.7031 44.9883 13.9531 44.9883 9.07031C44.9883 4.24609 41.3555 0.671875 37.1953 0.671875C33.0156 0.671875 29.3633 4.32422 29.3828 9.10938C29.3828 13.9531 32.9961 17.7031 37.1953 17.7031ZM14.6953 18.1523C18.3477 18.1523 21.4922 14.8711 21.4922 10.6328C21.4922 6.43359 18.3281 3.32812 14.6953 3.32812C11.082 3.32812 7.87891 6.51172 7.89844 10.6719C7.89844 14.8711 11.0625 18.1523 14.6953 18.1523ZM3.81641 35.7891H18.6406C16.6094 32.8398 19.0898 26.9023 23.3086 23.6602C21.1211 22.2148 18.3281 21.1406 14.6953 21.1406C5.88672 21.1406 0.378906 27.6445 0.378906 33.0547C0.378906 34.8125 1.33594 35.7891 3.81641 35.7891ZM24.9102 35.7891H49.4414C52.5273 35.7891 53.6211 34.9102 53.6211 33.1914C53.6211 28.1523 47.3125 21.1992 37.1758 21.1992C27.0586 21.1992 20.75 28.1523 20.75 33.1914C20.75 34.9102 21.8438 35.7891 24.9102 35.7891Z" fill="#7D77E9"/></svg>
+                                        </div>
+                                    </label>
+                                    <input class="acc-types__radio" type="radio" name="acc-type" id="personal">
+                                    <label for="personal" class="acc-types__item">
+                                        <p class="acc-types__text">Personal account</p>
+                                        <div class="acc-types__img">
+                                            <svg width="33" height="36" viewBox="0 0 33 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path class="acc-types__svg-path" d="M16.5 17.7031C20.6797 17.7031 24.3125 13.9531 24.3125 9.07031C24.3125 4.24609 20.6797 0.671875 16.5 0.671875C12.3203 0.671875 8.6875 4.32422 8.6875 9.10938C8.6875 13.9531 12.3008 17.7031 16.5 17.7031ZM4.21484 35.7891H28.7461C31.832 35.7891 32.9258 34.9102 32.9258 33.1914C32.9258 28.1523 26.6172 21.1992 16.4805 21.1992C6.36328 21.1992 0.0546875 28.1523 0.0546875 33.1914C0.0546875 34.9102 1.14844 35.7891 4.21484 35.7891Z" fill="#7D77E9"/></svg>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sign-up__right">
+                            <div class="form-input">
+                                <span 
+                                    class="form-input__label"
+                                    :class="{'has-error' : formWithErrors === true}"
+                                    >E-mail</span>
+                                <input 
+                                    type="text" 
+                                    v-model="forms.loginFormLogin"
+                                    class="form-input__input"
+                                    :class="{'has-error' : formWithErrors === true}"
+                                    placeholder="Enter your e-mail">
+                                    
+                                <small class="form-input__err" v-if="formWithErrors">Incorrect nickname or email</small>
+                            </div>
+                            <div class="form-input">
+                                <span 
+                                    class="form-input__label"
+                                    :class="{'has-error' : formWithErrors === true}"
+                                    >Password</span>
+                                
+                                <div class="form-input__ico-wrap">
+                                    <input 
+                                        type="password" 
+                                        v-model="forms.loginFormPassword"
+                                        class="form-input__input" 
+                                        :class="{'has-error' : formWithErrors === true}"
+                                        placeholder="Enter your password">
+                                    <div class="form-input__ico">
+                                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><g class="form-input__svg" opacity="0.5"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.8082 6.06667C6.36882 6.06667 1.04883 14.2333 1.04883 14.2333C1.04883 14.2333 6.36882 22.4 13.8082 22.4C21.2475 22.4 26.5675 14.2333 26.5675 14.2333C26.5675 14.2333 21.2475 6.06667 13.8082 6.06667Z" stroke="#7D77E9" stroke-linecap="round" stroke-linejoin="round"/><path fill-rule="evenodd" clip-rule="evenodd" d="M13.8081 18.6667C16.1969 18.6667 18.1333 16.5773 18.1333 14C18.1333 11.4227 16.1969 9.33334 13.8081 9.33334C11.4194 9.33334 9.48291 11.4227 9.48291 14C9.48291 16.5773 11.4194 18.6667 13.8081 18.6667Z" stroke="#7D77E9" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.2943 13.0667C11.9839 13.6468 11.9853 14.362 12.2982 14.9406C12.611 15.5193 13.1873 15.8727 13.8081 15.8667" stroke="#7D77E9" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+                                    </div>
+                                    
+                                </div>
+                                
+                                <small class="form-input__err" v-if="formWithErrors">Incorrect password</small>
+                            </div>
+                            <div class="dbl-input">
+                                <div class="form-input dbl-input__2">
+                                    <span 
+                                        class="form-input__label"
+                                        :class="{'has-error' : formWithErrors === true}"
+                                        >Your country</span>
+                                    <input 
+                                        type="text" 
+                                        v-model="forms.loginFormLogin"
+                                        class="form-input__input"
+                                        :class="{'has-error' : formWithErrors === true}"
+                                        placeholder="Enter your country">
+                                        
+                                    <small class="form-input__err" v-if="formWithErrors">Incorrect nickname or email</small>
+                                </div>
+
+                                <div class="form-input dbl-input__1">
+                                        <span 
+                                            class="form-input__label"
+                                            :class="{'has-error' : formWithErrors === true}"
+                                            >Currency</span>
+                                        
+                                            
+                                        <div class="form-input__ico-wrap">
+                                            <input 
+                                                type="password" 
+                                                v-model="forms.loginFormPassword"
+                                                class="form-input__input" 
+                                                :class="{'has-error' : formWithErrors === true}"
+                                                placeholder="USD">
+                                            <div class="form-input__ico form-input__ico_arrow"><svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path class="form-input__svg" opacity="0.6" d="M1 1L5.9975 6L11 1" stroke="#ABB7E0" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        
+                                        <small class="form-input__err" v-if="formWithErrors">Incorrect password</small>
+                                    </div>
+                                
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
             </div>
         </div>
     </div>

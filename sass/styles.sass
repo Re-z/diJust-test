@@ -101,23 +101,25 @@ body
         &.has-error
             color: #C8494E
 
+
     &__input
         width: 100%
         padding-bottom: 8px
         background: transparent
         border: none
-        border-bottom: 1px solid rgba(255,255,255,.3)
+        border-bottom: 2px solid rgba(255,255,255,.3)
         outline: none
         font-size: 16px
         color: white
         &.has-error
             border-bottom-color: #C8494E
-        
         &::placeholder
             color: rgba(255,255,255,.3)
             font-size: 16px
         &:focus
             border-bottom-color: #7D77E9
+            & + .form-input__ico .form-input__svg
+                opacity: 1
     &__ico-wrap
         position: relative
     &__err
@@ -129,6 +131,8 @@ body
         position: absolute
         right: 0
         bottom: 3px
+        &_arrow
+            bottom: 10px
 @keyframes slightAppear
     from
         opacity: 0
@@ -155,4 +159,73 @@ body
     &:hover
         & .btn__img
             animation: slightAppear .5s linear
+.sign-up
+    width: 100%
+    margin-top: 15px
+    &__box
+        display: flex
+    &__left
+        flex: 1
+        margin-right: 43px
+    &__right
+        flex: 1
+.dbl-input
+        display: flex
+        &__2
+            flex: 2
+            margin-right: 20px
+        &__1
+            flex: 1
+.acc-types
+    &__item
+        border-radius: 8px
+        padding: 19px 16px
+        display: flex
+        justify-content: space-between
+        align-items: center
+        margin-bottom: 20px
+        background: #1C1F4A
+        cursor: pointer
+        &.is-active
+            background: #25285A
+        &:last-of-type
+            margin-bottom: 0
+    &__text
+        color: white
+        font-weight: bold
+    &__radio
+        display: none
+    &__svg-path
+        opacity: .3
 
+#business:checked + .acc-types__item,
+#personal:checked + .acc-types__item
+    background: #25285A
+#business:checked + .acc-types__item .acc-types__svg-path,
+#personal:checked + .acc-types__item .acc-types__svg-path,
+    opacity: 1
+.stepper
+    display: flex
+    justify-content: space-between
+    &__item
+    &__item-name
+        color: #ABB7E0
+        font-size: 16px
+        font-weight: bold
+    &__item-round
+        display: inline-block
+        margin-top: 8px
+        width: 10px
+        height: 10px
+        background: white
+        border-radius: 50%
+        border: 10px solid #24264E
+        box-sizing: content-box
+        &.is-active
+            border: 10px solid $pink
+
+        
+.text-align-center
+    text-align: center
+.text-align-right
+    text-align: right

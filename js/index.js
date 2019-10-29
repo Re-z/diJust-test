@@ -2,7 +2,7 @@ let app = new Vue({
     el: '#app',
     data: {
         popupIsOpen: true,
-        activeTab: 'log-in',
+        activeTab: 'sign-up',
         formWithErrors: false,
         forms: {
             loginFormPassword: '',
