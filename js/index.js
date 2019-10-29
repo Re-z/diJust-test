@@ -3,19 +3,38 @@ let app = new Vue({
     data: {
         popupIsOpen: true,
         activeTab: 'sign-up',
-        formWithErrors: false,
-        forms: {
+        loginFormWithErrors: false,
+        signupFormWithErrors: false,
+        formsData: {
             loginFormPassword: '',
-            loginFormLogin: ''
+            loginFormLogin: '',
+            signupFormEmail: '',
+            signUpFormPassword: '',
+            signUpFormCountry: '',
+            signUpFormCurrency: '',
+            signUpFormTerms: false
+
         }
     },
     methods: {
         loginFormIsValid() {
-            if(this.forms.loginFormPassword && this.forms.loginFormLogin) {
+            if(this.formsData.loginFormPassword && this.formsData.loginFormLogin) {
                 return true
             } else {
                 return false
             }
+        },
+        signupFormIsValid(){
+            if(this.formsData.signupFormEmail 
+                && this.formsData.signUpFormPassword 
+                && this.formsData.signUpFormCountry
+                && this.formsData.signUpFormTerms
+                && this.formsData.signUpFormCurrency) {
+                return true
+            } else {
+                return false
+            }
+
         }
     },
 })

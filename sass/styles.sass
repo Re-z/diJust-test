@@ -1,6 +1,5 @@
-@import 'reset.sass'
 
-$mainColor: #fff
+    $mainColor: #fff
 $textColor: rgba(255,255,255,.3)
 $pink: #CB41A3
 *
@@ -92,15 +91,34 @@ body
     margin-bottom: 24px
     position: relative
     width: 100%
+    &_sm-margin
+        margin-bottom: 5px
     &__label
         color: rgba(255,255,255,.3)
-        display: block
+        display: inline-block
         font-size: 14px
         margin-bottom: 10px
         color: #ABB7E0
         &.has-error
             color: #C8494E
+    &__checkbox
+        display: none
+    &__checkbox-label
+        cursor: pointer
+        &:before
+            content: ''
+            width: 8px
+            height: 8px
+            display: inline-block
+            background: transparent
+            outline-offset: 2px
+            outline: 1px solid rgba(255,255,255,0.3)
+            margin-right: 12px
+            margin-left: 3px
+            vertical-align: middle
+            
 
+    
 
     &__input
         width: 100%
@@ -122,6 +140,8 @@ body
                 opacity: 1
     &__ico-wrap
         position: relative
+        & .form-input__input
+            padding-right: 30px
     &__err
         display: block
         margin-top: 5px
@@ -133,6 +153,11 @@ body
         bottom: 3px
         &_arrow
             bottom: 10px
+
+#terms:checked + .form-input__checkbox-label:before,
+#notifications:checked + .form-input__checkbox-label:before
+    background: #7D77E9
+
 @keyframes slightAppear
     from
         opacity: 0
@@ -149,8 +174,9 @@ body
     display: flex
     align-items: center
     cursor: pointer
+    will-change: opacity
     &.is-disabled
-        opacity: .6
+        opacity: .3
     &__text
         display: inline-block
         color: white
@@ -161,14 +187,20 @@ body
             animation: slightAppear .5s linear
 .sign-up
     width: 100%
-    margin-top: 15px
+    margin-top: 25px
     &__box
         display: flex
+        margin-top: 25px
     &__left
         flex: 1
         margin-right: 43px
     &__right
         flex: 1
+    &__btn-wrap
+        margin-top: 80px
+        display: flex
+        justify-content: center
+
 .dbl-input
         display: flex
         &__2
@@ -207,11 +239,16 @@ body
 .stepper
     display: flex
     justify-content: space-between
+    position: relative
     &__item
+        // position: relative
+        flex: 1
     &__item-name
         color: #ABB7E0
         font-size: 16px
         font-weight: bold
+        &.is-active
+            color: white
     &__item-round
         display: inline-block
         margin-top: 8px
@@ -221,6 +258,23 @@ body
         border-radius: 50%
         border: 10px solid #24264E
         box-sizing: content-box
+        // position: relative
+        &.has-line:after
+            display: inline-block
+            content: ''
+            width: 50%
+            left: 0
+            bottom: 18px
+            height: 1px
+            background: rgba(255,255,255,0.3)
+            position: absolute
+            z-index: -1
+        &.has-line_right:after
+            left: 50%
+        &.has-line_active:after
+            background: $pink
+            
+
         &.is-active
             border: 10px solid $pink
 

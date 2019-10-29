@@ -54,43 +54,43 @@
                             <div class="form-input">
                                 <span 
                                     class="form-input__label"
-                                    :class="{'has-error' : formWithErrors === true}"
+                                    :class="{'has-error' : loginFormWithErrors === true}"
                                     >Login</span>
                                 <input 
                                     type="text" 
-                                    v-model="forms.loginFormLogin"
+                                    v-model="formsData.loginFormLogin"
                                     class="form-input__input"
-                                    :class="{'has-error' : formWithErrors === true}"
+                                    :class="{'has-error' : loginFormWithErrors === true}"
                                     placeholder="Enter your nickname or email">
                                     
-                                <small class="form-input__err" v-if="formWithErrors">Incorrect nickname or email</small>
+                                <small class="form-input__err" v-if="loginFormWithErrors">Incorrect nickname or email</small>
                             </div>
             
                             <div class="form-input">
                                 <span 
                                     class="form-input__label"
-                                    :class="{'has-error' : formWithErrors === true}"
+                                    :class="{'has-error' : loginFormWithErrors === true}"
                                     >Password</span>
                                 
                                 <div class="form-input__ico-wrap">
                                     <input 
                                         type="password" 
-                                        v-model="forms.loginFormPassword"
+                                        v-model="formsData.loginFormPassword"
                                         class="form-input__input" 
-                                        :class="{'has-error' : formWithErrors === true}"
+                                        :class="{'has-error' : loginFormWithErrors === true}"
                                         placeholder="Enter your password">
                                     <div class="form-input__ico">
                                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><g class="form-input__svg" opacity="0.5"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.8082 6.06667C6.36882 6.06667 1.04883 14.2333 1.04883 14.2333C1.04883 14.2333 6.36882 22.4 13.8082 22.4C21.2475 22.4 26.5675 14.2333 26.5675 14.2333C26.5675 14.2333 21.2475 6.06667 13.8082 6.06667Z" stroke="#7D77E9" stroke-linecap="round" stroke-linejoin="round"/><path fill-rule="evenodd" clip-rule="evenodd" d="M13.8081 18.6667C16.1969 18.6667 18.1333 16.5773 18.1333 14C18.1333 11.4227 16.1969 9.33334 13.8081 9.33334C11.4194 9.33334 9.48291 11.4227 9.48291 14C9.48291 16.5773 11.4194 18.6667 13.8081 18.6667Z" stroke="#7D77E9" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.2943 13.0667C11.9839 13.6468 11.9853 14.362 12.2982 14.9406C12.611 15.5193 13.1873 15.8727 13.8081 15.8667" stroke="#7D77E9" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
                                     </div>
                                 </div>
                                 
-                                <small class="form-input__err" v-if="formWithErrors">Incorrect password</small>
+                                <small class="form-input__err" v-if="loginFormWithErrors">Incorrect password</small>
                             </div>
                         </div>
                         
                         <div class="log-in__btn-wrap">
                             <button 
-                                @click.prevent="formWithErrors = true"
+                                @click.prevent="loginFormWithErrors = true"
                                 type="submit" 
                                 :disabled="!loginFormIsValid()"
                                 :class="{'is-disabled' : loginFormIsValid() === false}"
@@ -108,19 +108,35 @@
                 <form class="sign-up" v-if="activeTab === 'sign-up'">
                     <div class="stepper">
                         <div class="stepper__item">
-                            <span class="stepper__item-name">Account</span>
+                            <span class="stepper__item-name is-active">Account</span>
                             <br>
-                            <div class="stepper__item-round"></div>
+                            <div 
+                                class="stepper__item-round is-active has-line"
+                                :class="{'has-line_active' : formsData.signupFormEmail && formsData.signUpFormPassword && formsData.signUpFormCountry && formsData.signUpFormCurrency}">
+                            </div>
                         </div>
                         <div class="stepper__item text-align-center">
-                            <span class="stepper__item-name">Profile</span>
+                            <span 
+                                class="stepper__item-name"
+                                :class="{'is-active' : formsData.signupFormEmail && formsData.signUpFormPassword && formsData.signUpFormCountry && formsData.signUpFormCurrency}">
+                                Profile</span>
                             <br>
-                            <span class="stepper__item-round"></span>
+                            <span 
+                                class="stepper__item-round has-line has-line_right"
+                                :class="{
+                                    'is-active' : formsData.signupFormEmail && formsData.signUpFormPassword && formsData.signUpFormCountry && formsData.signUpFormCurrency,
+                                    'has-line_active' : signupFormIsValid()
+                                }"></span>
                         </div>
                         <div class="stepper__item text-align-right">
-                            <span class="stepper__item-name">Verification</span>
+                            <span 
+                                class="stepper__item-name"
+                                :class="{'is-active' : formsData.signUpFormTerms}">
+                                Verification</span>
                             <br>
-                            <span class="stepper__item-round"></span>
+                            <span 
+                                class="stepper__item-round " 
+                                :class="{'is-active' : formsData.signUpFormTerms}"></span>
                         </div>
                     </div>
 
@@ -152,29 +168,29 @@
                             <div class="form-input">
                                 <span 
                                     class="form-input__label"
-                                    :class="{'has-error' : formWithErrors === true}"
+                                    :class="{'has-error' : signupFormWithErrors === true}"
                                     >E-mail</span>
                                 <input 
                                     type="text" 
-                                    v-model="forms.loginFormLogin"
+                                    v-model="formsData.signupFormEmail"
                                     class="form-input__input"
-                                    :class="{'has-error' : formWithErrors === true}"
+                                    :class="{'has-error' : signupFormWithErrors === true}"
                                     placeholder="Enter your e-mail">
                                     
-                                <small class="form-input__err" v-if="formWithErrors">Incorrect nickname or email</small>
+                                <small class="form-input__err" v-if="signupFormWithErrors">Incorrect email</small>
                             </div>
                             <div class="form-input">
                                 <span 
                                     class="form-input__label"
-                                    :class="{'has-error' : formWithErrors === true}"
+                                    :class="{'has-error' : signupFormWithErrors === true}"
                                     >Password</span>
                                 
                                 <div class="form-input__ico-wrap">
                                     <input 
                                         type="password" 
-                                        v-model="forms.loginFormPassword"
+                                        v-model="formsData.signUpFormPassword"
                                         class="form-input__input" 
-                                        :class="{'has-error' : formWithErrors === true}"
+                                        :class="{'has-error' : signupFormWithErrors === true}"
                                         placeholder="Enter your password">
                                     <div class="form-input__ico">
                                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><g class="form-input__svg" opacity="0.5"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.8082 6.06667C6.36882 6.06667 1.04883 14.2333 1.04883 14.2333C1.04883 14.2333 6.36882 22.4 13.8082 22.4C21.2475 22.4 26.5675 14.2333 26.5675 14.2333C26.5675 14.2333 21.2475 6.06667 13.8082 6.06667Z" stroke="#7D77E9" stroke-linecap="round" stroke-linejoin="round"/><path fill-rule="evenodd" clip-rule="evenodd" d="M13.8081 18.6667C16.1969 18.6667 18.1333 16.5773 18.1333 14C18.1333 11.4227 16.1969 9.33334 13.8081 9.33334C11.4194 9.33334 9.48291 11.4227 9.48291 14C9.48291 16.5773 11.4194 18.6667 13.8081 18.6667Z" stroke="#7D77E9" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.2943 13.0667C11.9839 13.6468 11.9853 14.362 12.2982 14.9406C12.611 15.5193 13.1873 15.8727 13.8081 15.8667" stroke="#7D77E9" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
@@ -182,37 +198,37 @@
                                     
                                 </div>
                                 
-                                <small class="form-input__err" v-if="formWithErrors">Incorrect password</small>
+                                <small class="form-input__err" v-if="signupFormWithErrors">Incorrect password</small>
                             </div>
                             <div class="dbl-input">
                                 <div class="form-input dbl-input__2">
                                     <span 
                                         class="form-input__label"
-                                        :class="{'has-error' : formWithErrors === true}"
+                                        :class="{'has-error' : signupFormWithErrors === true}"
                                         >Your country</span>
                                     <input 
                                         type="text" 
-                                        v-model="forms.loginFormLogin"
+                                        v-model="formsData.signUpFormCountry"
                                         class="form-input__input"
-                                        :class="{'has-error' : formWithErrors === true}"
+                                        :class="{'has-error' : signupFormWithErrors === true}"
                                         placeholder="Enter your country">
                                         
-                                    <small class="form-input__err" v-if="formWithErrors">Incorrect nickname or email</small>
+                                    <small class="form-input__err" v-if="signupFormWithErrors">Incorrect country</small>
                                 </div>
 
                                 <div class="form-input dbl-input__1">
                                         <span 
                                             class="form-input__label"
-                                            :class="{'has-error' : formWithErrors === true}"
+                                            :class="{'has-error' : signupFormWithErrors === true}"
                                             >Currency</span>
                                         
                                             
                                         <div class="form-input__ico-wrap">
                                             <input 
-                                                type="password" 
-                                                v-model="forms.loginFormPassword"
+                                                type="text" 
+                                                v-model="formsData.signUpFormCurrency"
                                                 class="form-input__input" 
-                                                :class="{'has-error' : formWithErrors === true}"
+                                                :class="{'has-error' : signupFormWithErrors === true}"
                                                 placeholder="USD">
                                             <div class="form-input__ico form-input__ico_arrow"><svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path class="form-input__svg" opacity="0.6" d="M1 1L5.9975 6L11 1" stroke="#ABB7E0" stroke-linecap="round" stroke-linejoin="round"/>
@@ -220,13 +236,34 @@
                                             </div>
                                         </div>
                                         
-                                        <small class="form-input__err" v-if="formWithErrors">Incorrect password</small>
+                                        <small class="form-input__err" v-if="signupFormWithErrors">Incorrect currency</small>
                                     </div>
                                 
 
-
+                            </div>
+                            <div class="form-input form-input_sm-margin">
+                                <input v-model="formsData.signUpFormTerms" class="form-input__checkbox" type="checkbox" name="terms" id="terms">
+                                <label for="terms" class="form-input__label form-input__checkbox-label">I accept terms & conditions</label>
+                            </div>
+                            <div class="form-input form-input_sm-margin">
+                                <input checked class="form-input__checkbox" type="checkbox" name="notifications" id="notifications">
+                                <label for="notifications" class="form-input__label form-input__checkbox-label">I’d like to recieve essential notifications</label>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="sign-up__btn-wrap">
+                        <button 
+                            @click.prevent="signupFormWithErrors = true"
+                            type="submit" 
+                            :disabled="!signupFormIsValid()"
+                            :class="{'is-disabled' : signupFormIsValid() === false}"
+                            class="btn">
+                            <span class="btn__text">Log in</span>
+                            <span class="btn__img">
+                                <svg width="38" height="14" viewBox="0 0 38 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M37 6.99914H1" stroke="white" stroke-linecap="round" stroke-linejoin="round"/><path d="M31 1L37 7L31 13" stroke="white" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </span>
+                        </button>
                     </div>
 
                 </form>
