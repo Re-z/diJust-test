@@ -1,14 +1,27 @@
 
-    $mainColor: #fff
-$textColor: rgba(255,255,255,.3)
+$whiteOpacity3: rgba(255,255,255,.3)
+$whiteOpacity6: rgba(255,255,255,.6)
 $pink: #CB41A3
+$tab: 740
+$mob: 550
+
+=resp($width)
+    @media screen and (max-width: $width + 'px')
+        @content
+
 *
     box-sizing: border-box
     transition: .25s
 
 body
     font-family: 'Roboto', sans-serif
-
+    padding: 0
+    margin: 0
+    background: url('../img/bg.jpg') center center no-repeat
+    background-size: cover
+    height: 100vh
+    +resp($mob)
+        background: none
 
 .overlay
     position: fixed
@@ -17,8 +30,12 @@ body
     right: 0
     bottom: 0
     width: 100%
-    background: rgba(255,255,255,0)
+    background: rgba(0,0,0,.7)
     z-index: 100
+    +resp($mob)
+        position: static
+
+
 
 .popup
     position: absolute
@@ -32,6 +49,15 @@ body
     min-height: 400px
     display: flex
     flex-direction: column
+    min-width: 360px
+    +resp($tab)
+        width: 100%
+        padding: 0 30px 40px 30px
+    +resp($mob)
+        padding: 0 20px 40px 20px
+        position: static
+        transform: translate(0,0)
+        border-radius: 0
     &__content
         flex: 1
         display: flex
@@ -47,12 +73,11 @@ body
     &__item
         font-size: 16px
         display: inline-block
-        color: rgba(255,255,255,.3)
-        font-weight: bold
+        color: $whiteOpacity3
+        font-weight: 500
         padding: 20px
         cursor: pointer
         position: relative
-            
         &:hover, &.is-active
             color: white
             &:after
@@ -69,12 +94,19 @@ body
     display: flex
     width: 100%
     margin-top: 35px
+    +resp($mob)
+        margin-top: 20px
+        display: block
     &__left
         flex: 1
         display: flex
         justify-content: center
+        +resp($mob)
+            margin-bottom: 20px
     &__left-img
         transform: translate(-20px)
+        +resp($mob)
+            transform: translate(0)
     &__right
         flex: 1
         justify-content: center
@@ -84,6 +116,9 @@ body
         align-items: center
     &__btn-wrap
         text-align: center
+        +resp($mob)
+            margin-top: 160px
+
     &__inputs-wrap
         width: 100%
 
@@ -94,11 +129,12 @@ body
     &_sm-margin
         margin-bottom: 5px
     &__label
-        color: rgba(255,255,255,.3)
+        color: $whiteOpacity3
         display: inline-block
         font-size: 14px
         margin-bottom: 10px
-        color: #ABB7E0
+        color: $whiteOpacity6
+        font-weight: 500
         &.has-error
             color: #C8494E
     &__checkbox
@@ -112,7 +148,7 @@ body
             display: inline-block
             background: transparent
             outline-offset: 2px
-            outline: 1px solid rgba(255,255,255,0.3)
+            outline: 1px solid $whiteOpacity3
             margin-right: 12px
             margin-left: 3px
             vertical-align: middle
@@ -125,14 +161,15 @@ body
         padding-bottom: 8px
         background: transparent
         border: none
-        border-bottom: 2px solid rgba(255,255,255,.3)
+        border-bottom: 2px solid $whiteOpacity3
         outline: none
         font-size: 16px
         color: white
+        font-weight: 500
         &.has-error
             border-bottom-color: #C8494E
         &::placeholder
-            color: rgba(255,255,255,.3)
+            color: $whiteOpacity3
             font-size: 16px
         &:focus
             border-bottom-color: #7D77E9
@@ -191,15 +228,21 @@ body
     &__box
         display: flex
         margin-top: 25px
+        +resp($mob)
+            display: block
     &__left
         flex: 1
         margin-right: 43px
+        +resp($mob)
+            margin-right: 0
     &__right
         flex: 1
     &__btn-wrap
         margin-top: 80px
         display: flex
         justify-content: center
+        +resp($mob)
+            margin-top: 30px
 
 .dbl-input
         display: flex
@@ -209,6 +252,10 @@ body
         &__1
             flex: 1
 .acc-types
+    +resp($mob)
+        display: flex
+        justify-content: space-between
+        margin-bottom: 40px
     &__item
         border-radius: 8px
         padding: 19px 16px
@@ -218,13 +265,22 @@ body
         margin-bottom: 20px
         background: #1C1F4A
         cursor: pointer
+        +resp($mob)
+            margin-bottom: 0
+            display: block
+            text-align: right
+            padding: 16px
         &.is-active
             background: #25285A
         &:last-of-type
             margin-bottom: 0
     &__text
         color: white
-        font-weight: bold
+        font-weight: 500
+        display: inline-block
+        +resp($mob)
+            margin-bottom: 5px
+
     &__radio
         display: none
     &__svg-path
@@ -244,9 +300,9 @@ body
         // position: relative
         flex: 1
     &__item-name
-        color: #ABB7E0
+        color: $whiteOpacity6
         font-size: 16px
-        font-weight: bold
+        font-weight: 500
         &.is-active
             color: white
     &__item-round
@@ -266,7 +322,7 @@ body
             left: 0
             bottom: 18px
             height: 1px
-            background: rgba(255,255,255,0.3)
+            background: $whiteOpacity3
             position: absolute
             z-index: -1
         &.has-line_right:after

@@ -4,20 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>diJust test task</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background: black;
+    
+  <style>
+      @keyframes rotation {
+          from {
+              transform: rotate(0deg);
+          } to {
+            transform: rotate(360deg);
+          }
+      }
+        .preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            background:black;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .is-hidden {
+        .preloader img {
+            animation: rotation 2s infinite linear;
+        }
+        .preloader.is-hidden {
             display: none;
         }
     </style>
 </head>
 <body>
 <div id="app">
-    <div id="preloader">
-            Preloaded
+    <div class="preloader">
+        <img src="img/preload-img.png" alt="Preloader">
     </div>
 
     <div class="overlay" v-if="popupIsOpen">
@@ -147,7 +167,7 @@
                                 <div class="acc-types">
                                     <input type="radio" class="acc-types__radio" checked name="acc-type" id="business">
                                     <label for="business" class="acc-types__item">
-                                        <p class="acc-types__text">Business account</p>
+                                        <span class="acc-types__text">Business account</span>
                                         <div class="acc-types__img">
                                             <svg width="54" height="36" viewBox="0 0 54 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path class="acc-types__svg-path" d="M37.1953 17.7031C41.375 17.7031 44.9883 13.9531 44.9883 9.07031C44.9883 4.24609 41.3555 0.671875 37.1953 0.671875C33.0156 0.671875 29.3633 4.32422 29.3828 9.10938C29.3828 13.9531 32.9961 17.7031 37.1953 17.7031ZM14.6953 18.1523C18.3477 18.1523 21.4922 14.8711 21.4922 10.6328C21.4922 6.43359 18.3281 3.32812 14.6953 3.32812C11.082 3.32812 7.87891 6.51172 7.89844 10.6719C7.89844 14.8711 11.0625 18.1523 14.6953 18.1523ZM3.81641 35.7891H18.6406C16.6094 32.8398 19.0898 26.9023 23.3086 23.6602C21.1211 22.2148 18.3281 21.1406 14.6953 21.1406C5.88672 21.1406 0.378906 27.6445 0.378906 33.0547C0.378906 34.8125 1.33594 35.7891 3.81641 35.7891ZM24.9102 35.7891H49.4414C52.5273 35.7891 53.6211 34.9102 53.6211 33.1914C53.6211 28.1523 47.3125 21.1992 37.1758 21.1992C27.0586 21.1992 20.75 28.1523 20.75 33.1914C20.75 34.9102 21.8438 35.7891 24.9102 35.7891Z" fill="#7D77E9"/></svg>
@@ -155,7 +175,7 @@
                                     </label>
                                     <input class="acc-types__radio" type="radio" name="acc-type" id="personal">
                                     <label for="personal" class="acc-types__item">
-                                        <p class="acc-types__text">Personal account</p>
+                                        <span class="acc-types__text">Personal account</span>
                                         <div class="acc-types__img">
                                             <svg width="33" height="36" viewBox="0 0 33 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path class="acc-types__svg-path" d="M16.5 17.7031C20.6797 17.7031 24.3125 13.9531 24.3125 9.07031C24.3125 4.24609 20.6797 0.671875 16.5 0.671875C12.3203 0.671875 8.6875 4.32422 8.6875 9.10938C8.6875 13.9531 12.3008 17.7031 16.5 17.7031ZM4.21484 35.7891H28.7461C31.832 35.7891 32.9258 34.9102 32.9258 33.1914C32.9258 28.1523 26.6172 21.1992 16.4805 21.1992C6.36328 21.1992 0.0546875 28.1523 0.0546875 33.1914C0.0546875 34.9102 1.14844 35.7891 4.21484 35.7891Z" fill="#7D77E9"/></svg>
@@ -272,15 +292,17 @@
         </div>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="js/index.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        let preloader = document.querySelector('#preloader');
-        preloader.classList.add('is-hidden')
+        setTimeout(() => {
+            const preloader = document.querySelector('.preloader');
+            preloader.classList.add('is-hidden')
+        }, 1000)
     })
 </script>
 

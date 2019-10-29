@@ -2,7 +2,7 @@ let app = new Vue({
     el: '#app',
     data: {
         popupIsOpen: true,
-        activeTab: 'sign-up',
+        activeTab: 'log-in',
         loginFormWithErrors: false,
         signupFormWithErrors: false,
         formsData: {
@@ -13,7 +13,6 @@ let app = new Vue({
             signUpFormCountry: '',
             signUpFormCurrency: '',
             signUpFormTerms: false
-
         }
     },
     methods: {
