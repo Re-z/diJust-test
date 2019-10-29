@@ -1,4 +1,4 @@
-
+@import 'reset'
 $whiteOpacity3: rgba(255,255,255,.3)
 $whiteOpacity6: rgba(255,255,255,.6)
 $pink: #CB41A3
@@ -9,6 +9,13 @@ $mob: 550
     @media screen and (max-width: $width + 'px')
         @content
 
+@keyframes slightAppear
+    from
+        opacity: 0
+        transform: translateX(-20px)
+    to
+        opacity: 1
+        transform: translateX(0)
 *
     box-sizing: border-box
     transition: .25s
@@ -21,7 +28,7 @@ body
     background-size: cover
     height: 100vh
     +resp($mob)
-        background: none
+        background: linear-gradient(180deg, #0F113E 0%, #090A34 100%)
 
 .overlay
     position: fixed
@@ -90,6 +97,7 @@ body
                 position: absolute
                 left: 0
                 top: 0
+
 .log-in
     display: flex
     width: 100%
@@ -118,7 +126,6 @@ body
         text-align: center
         +resp($mob)
             margin-top: 160px
-
     &__inputs-wrap
         width: 100%
 
@@ -152,10 +159,6 @@ body
             margin-right: 12px
             margin-left: 3px
             vertical-align: middle
-            
-
-    
-
     &__input
         width: 100%
         padding-bottom: 8px
@@ -195,13 +198,6 @@ body
 #notifications:checked + .form-input__checkbox-label:before
     background: #7D77E9
 
-@keyframes slightAppear
-    from
-        opacity: 0
-        transform: translateX(-20px)
-    to
-        opacity: 1
-        transform: translateX(0)
 .btn
     border-radius: 20px
     padding: 10px 20px
@@ -297,7 +293,6 @@ body
     justify-content: space-between
     position: relative
     &__item
-        // position: relative
         flex: 1
     &__item-name
         color: $whiteOpacity6
@@ -314,7 +309,6 @@ body
         border-radius: 50%
         border: 10px solid #24264E
         box-sizing: content-box
-        // position: relative
         &.has-line:after
             display: inline-block
             content: ''
@@ -329,12 +323,9 @@ body
             left: 50%
         &.has-line_active:after
             background: $pink
-            
-
         &.is-active
             border: 10px solid $pink
 
-        
 .text-align-center
     text-align: center
 .text-align-right
